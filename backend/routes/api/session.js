@@ -21,7 +21,7 @@ const validateLogin = [
 ];
 
 
-
+//Login
 router.post(
   '/',
   validateLogin,
@@ -47,6 +47,8 @@ router.post(
 
     const safeUser = {
       id: user.id,
+      firstName: user.firstName,
+      lastName: user.lastName,
       email: user.email,
       username: user.username,
     };
@@ -60,6 +62,7 @@ router.post(
 );
 
 
+//logout
   router.delete(
     '/',
   (_req, res) => {
@@ -68,6 +71,8 @@ router.post(
   }
   );
 
+
+//restore
   router.get(
     '/',
     (req, res) => {
@@ -75,6 +80,8 @@ router.post(
       if (user) {
         const safeUser = {
           id: user.id,
+          firstName: user.firstName,
+          lastName: user.lastName,
           email: user.email,
           username: user.username,
         };
