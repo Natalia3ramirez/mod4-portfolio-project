@@ -8,13 +8,43 @@ const { handleValidationErrors } = require('../../utils/validation');
 const router = express.Router();
 
 
-router.get('/', async (req, res, next) => {
-  const allSpots = await Spot.findAll()
+router.get('/', async (req, res) => {
+  const allSpots = await Spot.findAll({
+    include: [
+      {
+        model: Review
+      },
+      {
+      model: SpotImage,
+      attributes: ['url']
+    }
+  ]
+  })
 
-  res.json(allSpots)
+  const newSpots = allSpots.map(spot => {
+    const spotObj = spot.toJSON();
+
+    let totalRating = 0
+    for(let review of spotObj.Reviews){
+      totalRating += review.stars
+
+    }
+    spotObj.avgRating = totalRating / spotObj.Reviews.length;
+    spotObj.previewImage = spotObj.SpotImages[0]?.url
+
+
+    delete spotObj.Reviews;
+    delete spotObj.SpotImages;
+
+    return spotObj
+  });
+
+  res.json({Spots: newSpots})
 })
 
-
+router.get('/current', requireAuth, async (req, res, next) => {
+  
+})
 
 
 
