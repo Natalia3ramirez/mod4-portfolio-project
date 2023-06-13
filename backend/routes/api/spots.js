@@ -42,7 +42,47 @@ router.get('/', async (req, res) => {
   res.json({Spots: newSpots})
 })
 
+
+createSpotChecker = (req, res, next) => {
+  const { address, city, state, country, lat, lng, name, description, price} = req.body
+
+  const errors = {}
+
+  if(!address) errors.address = 'Street address is required'
+  if(!city) errors.city = "City is required"
+  if(!state) errors.state = "State is required"
+  if(!country) errors.country = "Country is required"
+  if(!lat) errors.lat = "Latitude is not valid"
+  if(!lng) errors.lng = "Longitude is not valid"
+  if(!name) errors.name = "Name must be less than 50 characters"
+  if(!description) errors.description = "Description is required"
+  if(!price) errors.price = "Price per day is required"
+
+  if(Object.keys(errors).length > 0) {
+    return res.status(400).json({message: 'Bad Request', errors: errors})
+
+  }
+  next()
+}
+
 //create a spot
+router.post('/', requireAuth, createSpotChecker,  async (req, res, next) => {
+  const { address, city, state, country, lat, lng, name, description, price} = req.body
+
+  const newSpot = await Spot.create({
+    ownerId: req.user.id,
+    address,
+    city,
+    state,
+    country,
+    lat,
+    lng,
+    name,
+    description,
+    price,
+  })
+  res.status(201).json(newSpot)
+})
 
 
 // get all spots by current user
@@ -84,7 +124,7 @@ router.get('/current', requireAuth, async (req, res) => {
 
 
 // get all spot details by id
-router.get('/:spotId', async (req, res, next) => {
+router.get('/:spotId', async (req, res) => {
   const singleSpot = await Spot.findByPk(req.params.spotId, {
     include: [
       {
