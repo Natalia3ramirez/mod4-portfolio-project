@@ -369,7 +369,7 @@ router.post('/:spotId/bookings', requireAuth, async (req, res) => {
   })
 
   if(bookingConflict){
-    res.status(403).json({
+    return res.status(403).json({
       message: "Sorry, this spot is already booked for the specified dates",
       errors: {
         startDate: "Start date conflicts with an existing booking",
@@ -385,16 +385,43 @@ router.post('/:spotId/bookings', requireAuth, async (req, res) => {
       endDate
   })
 
-  res.json({
-    id: newBooking.id,
-    userId: newBooking.userId,
-    spotId: newBooking.spotId,
-    startDate: newBooking.startDate.toISOString().split('T')[0],
-    endDate: newBooking.endDate.toISOString().split('T')[0],
-    createdAt: newBooking.createdAt.toISOString().split('T')[0],
-    updated: newBooking.updatedAt.toISOString().split('T')[0]
+  res.json(newBooking)
+})
+
+
+//get all bookings for a spot based on spotId
+router.get('/:spotId/bookings', requireAuth, async (req, res) => {
+  const spot = await Spot.findByPk(req.params.spotId)
+
+  if(!spot){
+    return res.status(404).json({
+      message: "Spot couldn't be found"
+    })
+  }
+
+  const bookings = await Booking.findAll({
+    where: {
+      spotId: req.params.spotId
+    },
+    attributes: ['spotId', 'startDate', 'endDate']
   })
 
+  const ownerBookings = await Booking.findAll({
+    where: {
+      spotId: req.params.spotId
+    },
+    include: User
+  })
+
+  if(spot.ownerId !== req.user.id){
+    res.json({"Bookings":bookings})
+  }
+
+  if(spot.ownerId === req.user.id){
+    res.json({"Bookings": ownerBookings})
+  }
 })
+
+
 
 module.exports = router;
