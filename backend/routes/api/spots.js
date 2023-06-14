@@ -4,6 +4,8 @@ const { Spot, User, Booking, SpotImage, Review, ReviewImage  } = require('../../
 const { check } = require('express-validator');
 const { handleValidationErrors } = require('../../utils/validation');
 const spot = require('../../db/models/spot');
+const { Op} = require('sequelize');
+const booking = require('../../db/models/booking');
 
 
 const router = express.Router();
@@ -97,7 +99,7 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
     return res.status(404).json({message: "Spot coudln't be found"})
   }
   if(spot.ownerId !== req.user.id){
-    res.status(403).json({message: "Forbidden"})
+    return res.status(403).json({message: "Forbidden"})
   }
 
   const newImage = await spot.createSpotImage({
@@ -204,7 +206,7 @@ router.put('/:spotId', requireAuth, createSpotChecker, async(req, res) => {
     })
   }
   if(spot.ownerId !== req.user.id){
-    res.status(403).json({message: "Forbidden"})
+    return res.status(403).json({message: "Forbidden"})
   }
 
 
@@ -253,7 +255,7 @@ router.delete('/:spotId', requireAuth, async (req, res) => {
     return res.status(404).json({message: "Spot couldn't be found"})
   }
   if(spot.ownerId !== req.user.id){
-    res.status(403).json({message: "Forbidden"})
+    return res.status(403).json({message: "Forbidden"})
   }
 
   await spot.destroy()
@@ -320,8 +322,6 @@ router.get('/:spotId/reviews', async (req,res) => {
     })
   }
 
-
-
   const reviews = await Review.findAll({
     where: {
       spotId: req.params.spotId
@@ -347,5 +347,54 @@ router.get('/:spotId/reviews', async (req,res) => {
 
 
 
+//create a booking from a Spot based on Spot's id
+router.post('/:spotId/bookings', requireAuth, async (req, res) => {
+  const {startDate, endDate } = req.body
+  const spot = await Spot.findByPk(req.params.spotId)
+
+  if(!spot){
+    return res.status(404).json({message: "Spot couldn't be found"})
+  }
+  if(spot.ownerId === req.user.id){
+    return res.status(403).json({message: "Forbidden"})
+  }
+
+  const bookingConflict = await Booking.findOne({
+    where: {
+      [Op.or]: [
+        {startDate: {[Op.between]: [startDate, endDate]}},
+        {endDate: {[Op.between]: [startDate, endDate]}}
+      ]
+    }
+  })
+
+  if(bookingConflict){
+    res.status(403).json({
+      message: "Sorry, this spot is already booked for the specified dates",
+      errors: {
+        startDate: "Start date conflicts with an existing booking",
+        endDate: "End date conflicts with an existing booking"
+      }
+    })
+  }
+
+    const newBooking = await spot.createBooking({
+      userId: req.user.id,
+      spotId: spot.id,
+      startDate,
+      endDate
+  })
+
+  res.json({
+    id: newBooking.id,
+    userId: newBooking.userId,
+    spotId: newBooking.spotId,
+    startDate: newBooking.startDate.toISOString().split('T')[0],
+    endDate: newBooking.endDate.toISOString().split('T')[0],
+    createdAt: newBooking.createdAt.toISOString().split('T')[0],
+    updated: newBooking.updatedAt.toISOString().split('T')[0]
+  })
+
+})
 
 module.exports = router;
