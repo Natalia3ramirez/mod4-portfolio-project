@@ -10,8 +10,43 @@ const booking = require('../../db/models/booking');
 
 const router = express.Router();
 
+
+
+
+
+createQueryChecker = (req, res, next) => {
+  const {page, size} = req.query
+
+  const errors = {}
+
+  if(+page < 1) errors.page = "Page must be greater than or equal to 1"
+  if(+size < 1) errors.size = "Size must be greater than or equal to 1"
+
+  if(Object.keys(errors).length > 0) {
+    return res.status(400).json({message: 'Bad Request', errors: errors})
+
+  }
+  next()
+}
+
+
 //get all spots
-router.get('/', async (req, res) => {
+router.get('/', createQueryChecker, async (req, res) => {
+  let {page, size} = req.query
+
+  pagination = {}
+  if(isNaN(page) || page <= 0) page = 1;
+  if(isNaN(size) || size <= 0) size = 20;
+
+  size = +size;
+  page = +page;
+
+  if(size > 10) size = 10;
+  if(page > 20) page = 20;
+
+  pagination.limit = size;
+  pagination.offset = size * (page -1)
+
   const allSpots = await Spot.findAll({
     include: [
       {
@@ -21,9 +56,9 @@ router.get('/', async (req, res) => {
       model: SpotImage,
       attributes: ['url']
     }
-  ]
+  ],
+  ...pagination
   })
-
   const newSpots = allSpots.map(spot => {
     const spotObj = spot.toJSON();
 
@@ -39,10 +74,14 @@ router.get('/', async (req, res) => {
     delete spotObj.Reviews;
     delete spotObj.SpotImages;
 
+
+
     return spotObj
   });
 
-  res.json({Spots: newSpots})
+
+
+  return res.json({Spots: newSpots, page, size})
 })
 
 
