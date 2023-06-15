@@ -41,8 +41,8 @@ router.get('/', createQueryChecker, async (req, res) => {
   size = +size;
   page = +page;
 
-  if(size > 10) size = 10;
-  if(page > 20) page = 20;
+  if(page > 10) page = 10;
+  if(size > 20) size = 20;
 
   pagination.limit = size;
   pagination.offset = size * (page -1)
