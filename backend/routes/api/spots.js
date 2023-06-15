@@ -339,7 +339,6 @@ router.get('/:spotId/reviews', async (req,res) => {
 
   })
 
-
   res.json({
     "Reviews": reviews})
 })
