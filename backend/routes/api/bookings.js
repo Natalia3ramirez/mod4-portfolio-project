@@ -133,13 +133,4 @@ router.delete('/:bookingId', requireAuth, async (req, res) => {
 })
 
 
-
-
-
-
-
-
-
-
-
 module.exports = router;
