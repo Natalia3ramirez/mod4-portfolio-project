@@ -34,7 +34,7 @@ createQueryChecker = (req, res, next) => {
 router.get('/', createQueryChecker, async (req, res) => {
   let {page, size} = req.query
 
-  pagination = {}
+   pagination = {}
   if(isNaN(page) || page <= 0) page = 1;
   if(isNaN(size) || size <= 0) size = 20;
 
@@ -135,7 +135,7 @@ router.post('/:spotId/images', requireAuth, async (req, res, next) => {
 
   const spot = await Spot.findByPk(req.params.spotId)
   if(!spot){
-    return res.status(404).json({message: "Spot coudln't be found"})
+    return res.status(404).json({message: "Spot couldn't be found"})
   }
   if(spot.ownerId !== req.user.id){
     return res.status(403).json({message: "Forbidden"})
@@ -448,7 +448,11 @@ router.get('/:spotId/bookings', requireAuth, async (req, res) => {
     where: {
       spotId: req.params.spotId
     },
-    include: User
+    include: [
+      {
+        model: User,
+        attributes: ["id", "firstName", "lastName"]
+      }]
   })
 
   if(spot.ownerId !== req.user.id){
