@@ -1,20 +1,23 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import './Navigation.css';
 
 function Navigation({ isLoaded }){
   const sessionUser = useSelector(state => state.session.user);
+  const history = useHistory()
+
+
+  const handleLogoClick = () => {
+    history.push('/')
+  }
 
   return (
     <>
-    <div className='logo-container'>
-      <img className='logo' src="../icon/relaxrnr-high-resolution-logo-color-on-transparent-background.png" alt="RelaxRnR" />
-    </div>
-    <ul>
+    <ul className='nav-list'>
       <li>
-        <NavLink exact to="/">Home</NavLink>
+        <NavLink exact to="/"><img className='logo' src="../icon/relaxrnr-high-resolution-logo-color-on-transparent-background.png" alt="RelaxRnR" onClick={handleLogoClick}/></NavLink>
       </li>
       {isLoaded && (
         <li>

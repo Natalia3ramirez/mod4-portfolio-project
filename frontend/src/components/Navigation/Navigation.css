@@ -4,8 +4,34 @@
 
 
 .logo {
-  height: 55px
+  height: 65px
 }
 
 
+.logo:hover {
+cursor: pointer
+}
 
+.nav-list {
+ list-style-type: none;
+ display: flex;
+ justify-content: space-between;
+ align-items: center;
+ padding-right: 40px;
+}
+
+.user-button-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  border-radius:40%;
+  background-color: white;
+}
+
+.profile-dropdown {
+  list-style-type: none;
+  position: absolute;
+  right: 55px;
+  top: 75px
+}
