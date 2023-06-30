@@ -8,6 +8,10 @@ function Navigation({ isLoaded }){
   const sessionUser = useSelector(state => state.session.user);
 
   return (
+    <>
+    <div className='logo-container'>
+      <img className='logo' src="../icon/relaxrnr-high-resolution-logo-color-on-transparent-background.png" alt="RelaxRnR" />
+    </div>
     <ul>
       <li>
         <NavLink exact to="/">Home</NavLink>
@@ -18,6 +22,7 @@ function Navigation({ isLoaded }){
         </li>
       )}
     </ul>
+    </>
   );
 }
 
