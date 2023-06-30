@@ -32,13 +32,11 @@ export const login = (user) => async (dispatch) => {
   return response;
 };
 
-export const logOut = () => async (dispatch) => {
-  const response = await csrfFetch("/api/session", {
-    method: "DELETE",
-
+export const logout = () => async (dispatch) => {
+  const response = await csrfFetch('/api/session', {
+    method: 'DELETE',
   });
-  const data = await response.json();
-  dispatch(removeUser(data));
+  dispatch(removeUser());
   return response;
 };
 
