@@ -55,6 +55,11 @@ router.put('/:bookingId', requireAuth, async (req, res) =>{
     return res.status(403).json({message: "Forbidden"})
   }
 
+  // let currentDate = new Date().getTime();
+  // let startingDate = booking.startDate.toString()
+
+
+
   let currentDate = new Date().toJSON().slice(0,10)
   if(startDate < currentDate || endDate < currentDate){
     return res.status(403).json({"message": "Past bookings can't be modified"})
