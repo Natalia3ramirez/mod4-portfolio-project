@@ -37,6 +37,7 @@ if (process.env.NODE_ENV !== 'production') {
   });
 }
 
+module.exports = router;
 // router.get("/api/csrf/restore", (req, res) => {
 //   const csrfToken = req.csrfToken();
 //   res.cookie("XSRF-TOKEN", csrfToken);
@@ -45,5 +46,4 @@ if (process.env.NODE_ENV !== 'production') {
 //   });
 // });
 
-module.exports = router;
 
