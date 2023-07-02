@@ -19,15 +19,63 @@ module.exports = {
     return queryInterface.bulkInsert(options, [
       {
         reviewId: 1,
-        url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR7p9cyzfV7lgsThwDHovc3eBQw8RSnk5abaYo_2e8jRA&usqp=CAU&ec=48600113"
+        url: "https://tinyurl.com/48xphkut"
       },
       {
-        reviewId: 2,
-        url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT1A5eyyH1PoA6WLmb1SLFNaOdL31DnCZMCAduxAdAKUQ&usqp=CAU&ec=48600113"
+        reviewId: 4,
+        url: "https://tinyurl.com/ahp8euz3"
       },
       {
-        reviewId: 3,
-        url: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSzrgdD7mMcZ1WoGLWM4sAU_YxAj4ST0mxbAROYNAHAPg&usqp=CAU&ec=48600113"
+        reviewId: 7,
+        url: "https://tinyurl.com/msd4wc6w"
+      },
+      {
+        reviewId: 10,
+        url: "https://tinyurl.com/2mskjs87"
+      },
+      {
+        reviewId: 13,
+        url: "https://tinyurl.com/5hd9ma93"
+      },
+      {
+        reviewId: 16,
+        url: "https://tinyurl.com/4pbeue9c"
+      },
+      {
+        reviewId: 19,
+        url: "https://tinyurl.com/4k8kt9jr"
+      },
+      {
+        reviewId: 22,
+        url: "https://tinyurl.com/3rcpcm52"
+      },
+      {
+        reviewId: 25,
+        url: "https://tinyurl.com/5n9xaxz8"
+      },
+      {
+        reviewId: 28,
+        url: "https://tinyurl.com/2axnzknt"
+      },
+      {
+        reviewId: 31,
+        url: "https://tinyurl.com/mr3m9fds"
+      },
+      {
+        reviewId: 34,
+        url: "https://tinyurl.com/4h5rzp2f"
+      },
+      {
+        reviewId: 37,
+        url: "https://tinyurl.com/23t7abdf"
+      },
+      {
+        reviewId: 40,
+        url: "https://tinyurl.com/mvdeydfj"
+      },
+      {
+        reviewId: 43,
+        url: "https://tinyurl.com/3ad7ydd4"
       }
     ], {})
   },
