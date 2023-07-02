@@ -4,7 +4,7 @@
 
 
 .logo {
-  height: 65px
+  height: 40px
 }
 
 
@@ -24,9 +24,13 @@ cursor: pointer
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 5px;
-  border-radius:40%;
+  gap: 7px;
+  border-radius:45%;
   background-color: white;
+  cursor: pointer;
+  border: 1px solid rgb(214, 211, 211);
+  padding: 5px;
+
 }
 
 .profile-dropdown {
@@ -34,4 +38,26 @@ cursor: pointer
   position: absolute;
   right: 55px;
   top: 75px
+}
+
+
+#root {
+  border-bottom: 1px solid rgb(214, 211, 211);
+
+}
+
+.body-container {
+  margin: 0px
+}
+
+.fa-user-circle {
+  transform: scale(1.5);
+  color: rgb(117, 116, 116);
+  border: 5px
+}
+
+.material-symbols-outlined {
+  color: rgb(117, 116, 116);
+  transform: scale(.65);
+  font-weight: bold
 }
