@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { useModal } from "../../context/Modal";
 import * as sessionActions from "../../store/session";
 import "./SignupForm.css";
+
 
 function SignupFormModal() {
   const dispatch = useDispatch();
@@ -14,6 +15,31 @@ function SignupFormModal() {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [errors, setErrors] = useState({});
   const { closeModal } = useModal();
+
+  // useEffect(() => {
+  //   const errors = {}
+
+  //   if(email.length < 1) {
+  //     errors.email = "Email field cannot be empty"
+  //   }
+  //   if(username.length < 1) {
+  //     errors.username = "Username field cannot be empty"
+  //   }
+  //   if(firstName.length < 1) {
+  //     errors.firstName = "First Name field cannot be empty"
+  //   }
+  //   if(lastName.length < 1) {
+  //     errors.lastName= "Last Name field cannot be empty"
+  //   }
+  //   if(password.length < 1) {
+  //     errors.password = "Password field cannot be empty"
+  //   }
+  //   if(confirmPassword.length < 1) {
+  //     errors.confirmPassword = "Confirm Password field cannot be empty"
+  //   }
+
+  //   setErrors(errors)
+  // }, [email, username, firstName, lastName, confirmPassword, password])
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -107,7 +133,7 @@ function SignupFormModal() {
         {errors.confirmPassword && (
           <p>{errors.confirmPassword}</p>
         )}
-        <button type="submit">Sign Up</button>
+        <button type="submit" >Sign Up</button>
       </form>
     </>
   );
