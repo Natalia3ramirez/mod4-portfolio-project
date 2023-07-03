@@ -1,0 +1,21 @@
+.preview-image {
+  width: 250px
+}
+
+
+
+.spot-name-tooltip {
+  visibility: hidden;
+  position: absolute;
+  width: 100px;
+  color: white;
+  font-size: 12px;
+  background-color: #787c7e;
+  border-radius: 10px;
+  padding: 5px 5px 5px 5px;
+  text-align: center;
+}
+
+.all-spots-container:hover .spot-name-tooltip {
+  visibility: visible;
+}
