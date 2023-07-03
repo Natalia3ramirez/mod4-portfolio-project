@@ -20,7 +20,7 @@ function Navigation({ isLoaded }){
         <NavLink exact to="/"><img className='logo' src="../icon/relaxrnr-high-resolution-logo-color-on-transparent-background.png" alt="RelaxRnR" onClick={handleLogoClick}/></NavLink>
       </li>
       {isLoaded && (
-        <li>
+        <li id='profile-button'>
           <ProfileButton user={sessionUser} />
         </li>
       )}

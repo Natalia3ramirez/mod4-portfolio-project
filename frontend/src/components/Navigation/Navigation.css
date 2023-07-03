@@ -17,7 +17,11 @@ cursor: pointer
  display: flex;
  justify-content: space-between;
  align-items: center;
- padding-right: 40px;
+ padding-right: 20px;
+ padding-left: 20px;
+ border-bottom: 1px solid #CCCCCC;
+ height: 70px;
+ margin: 0px;
 }
 
 .user-button-container {
@@ -28,7 +32,7 @@ cursor: pointer
   border-radius:45%;
   background-color: white;
   cursor: pointer;
-  border: 1px solid rgb(214, 211, 211);
+  border: 1px solid #CCCCCC;
   padding: 5px;
 
 }
@@ -37,27 +41,54 @@ cursor: pointer
   list-style-type: none;
   position: absolute;
   right: 55px;
-  top: 75px
+  top: 75px;
+  border: 1px solid black;
+  padding-left: 0px;
+  background-color: white;
+  padding-left: 10px;
+  padding-right: 10px;
+
 }
 
-
-#root {
-  border-bottom: 1px solid rgb(214, 211, 211);
-
-}
 
 .body-container {
-  margin: 0px
+  margin: 0px;
+
 }
 
 .fa-user-circle {
   transform: scale(1.5);
-  color: rgb(117, 116, 116);
+  color: #7a7a7a;
   border: 5px
 }
 
 .material-symbols-outlined {
-  color: rgb(117, 116, 116);
+  color: #7a7a7a;
   transform: scale(.65);
   font-weight: bold
 }
+
+
+#profile-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px
+}
+
+
+a {
+  text-decoration: none;
+  color: black
+}
+
+.logout-button {
+  background-color: #7a7a7a;
+  color: white;
+  border-radius: 40%;
+  padding: 7px;
+  margin: 5px;
+  border: 2px solid black;
+}
+
+

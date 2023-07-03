@@ -46,7 +46,8 @@ function ProfileButton({ user }) {
 
   return (
     <>
-    {user ? (<NavLink className="user-create-new-spot" to='/spots/new'>Create a New Spot</NavLink>) : ("")}
+
+    {user ? (<span><NavLink className="user-create-new-spot" to='/spots/new'>Create a New Spot</NavLink></span>) : ("")}
       <button className='user-button-container' onClick={openMenu}>
         <span className="material-symbols-outlined">menu</span>
         <i className="fas fa-user-circle" />
@@ -61,7 +62,7 @@ function ProfileButton({ user }) {
             <NavLink exact to="/spots/current" className='user-manage-spots'>Manage Spots</NavLink>
             </li>
             <li>
-              <button onClick={logout}>Log Out</button>
+              <button className='logout-button' onClick={logout}>Log Out</button>
             </li>
           </>
         ) : (
