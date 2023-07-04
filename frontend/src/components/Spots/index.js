@@ -10,12 +10,12 @@ export const Spots = () => {
   const getSpots = useSelector(state => state.spot.allSpots)
   const spots = Object.values(getSpots)
 
-  // if(!spots.length > 0) return null
 
   useEffect(() => {
     dispatch(thunkGetSpots())
   }, [dispatch ])
 
+  if(!spots.length > 0) return null
   return (
     <div>
       {spots.map(spot => (

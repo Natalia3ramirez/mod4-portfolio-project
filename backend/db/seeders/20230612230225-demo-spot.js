@@ -38,7 +38,7 @@ module.exports = {
         lat: 8.8001015,
         lng: -82.1978149,
         name: "Lost and Found",
-        description: "Wlcome to the jungle. Enjoy the jungle mountains with some hiking trails",
+        description: "Wecome to the jungle. Enjoy the jungle mountains with some hiking trails",
         price: 21.99
       },
       {

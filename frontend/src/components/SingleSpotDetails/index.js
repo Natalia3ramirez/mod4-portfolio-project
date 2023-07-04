@@ -17,8 +17,8 @@ export const SingleSpotDetails = ({spot}) => {
 
   return (
 
-    <div className='all-spots-container'>
-      <div id='spot-detail' key={id} onClick={handleClick}>
+    <div className='all-spots-container' key={id} onClick={handleClick}>
+      <div id='spot-detail' >
         <div id='name-container'>
           <span className='spot-name-tooltip'>{name}</span>
           <img src={displayImage} alt={name} className='preview-image' title={name} />
