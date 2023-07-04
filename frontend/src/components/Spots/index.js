@@ -17,7 +17,7 @@ export const Spots = () => {
 
   if(!spots.length > 0) return null
   return (
-    <div>
+    <div className='spot-details-container'>
       {spots.map(spot => (
           <SingleSpotDetails key={spot.id} spot={spot} />
         ))}
