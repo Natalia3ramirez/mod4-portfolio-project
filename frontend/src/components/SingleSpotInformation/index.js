@@ -6,6 +6,7 @@ import OpenModalButton from "../OpenModalButton";
 import ReserveModal from '../ReserveModal';
 import { thunkGetSpotReviews } from '../../store/reviews';
 // import { SpotReviews } from '../SpotReviews';
+import './SingleSpotInformation.css'
 
 
 

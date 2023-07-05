@@ -1,6 +1,8 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { SingleSpotInformation } from '../SingleSpotInformation';
-
+import { DeleteReviewModalButton } from './DeleteReviewModalButton';
+import OpenModalButton from '../OpenModalButton';
+import './SpotReviews.css'
 
 
 
@@ -10,6 +12,7 @@ export const SpotReviews = () => {
   const reviewsList = Object.values(reviews)
 
   const spot = useSelector(state => (state.spot.singleSpot))
+  const user = useSelector(state => state.session.user)
 
   const generateDate = (date) => {
     const event = new Date(date);
@@ -18,7 +21,7 @@ export const SpotReviews = () => {
     return `${month} ${year}`
   }
 
-  const { name, Owner, city, state, country, SpotImages, description, avgStarRating, numReviews, price} = spot
+  const {  avgStarRating, numReviews} = spot
 
   return (
     <div>
@@ -30,6 +33,8 @@ export const SpotReviews = () => {
             <h3 className="user-first-name">{review.User.firstName}</h3>
             <h4>{generateDate(review.createdAt)}</h4>
             <p>{review.review}</p>
+            {(review.userId === user?.id) &&
+              <OpenModalButton buttonText='Delete Review' modalComponent={<DeleteReviewModalButton reviewId={review.id} spotId={spot.id} />} />}
           </div>
 
         ))}
