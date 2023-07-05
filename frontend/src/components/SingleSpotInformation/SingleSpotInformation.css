@@ -1,0 +1,35 @@
+.spot-images {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.spot-preview-image {
+  width: 500px;
+  height: 370px;
+  border-radius: 0;
+}
+
+.four-images {
+  width: 275px;
+  object-fit: cover;
+  gap: 5px
+
+}
+
+.four-image-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  width: 10%
+}
+
+.spot-name-description {
+  border-bottom: 2px solid black;
+}
+
+
+.reserve-box {
+  border: 1px solid black;
+  display: flex;
+  justify-content: flex-end
+
+}

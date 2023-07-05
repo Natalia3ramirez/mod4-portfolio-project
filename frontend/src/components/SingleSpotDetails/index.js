@@ -2,12 +2,11 @@ import { useHistory } from 'react-router';
 import './SingleSpotDetails.css'
 
 
+
 export const SingleSpotDetails = ({ spot }) => {
   const history = useHistory()
 
-
-
-  const { id, name, previewImage, city, state, avgStarRating, price } = spot;
+  const { id, name, previewImage, city, state, avgRating, price } = spot;
 
   const handleClick = () => {
     history.push(`/spots/${spot.id}`)
@@ -27,17 +26,19 @@ export const SingleSpotDetails = ({ spot }) => {
             <img src={displayImage} alt={name} className='preview-image' title={name} />
           </div>
         </div>
-        <div className='spot-details-container'>
-          <div className='spot-city-and-state'>{city}, {state}</div>
+        <div className='spot-text-container'>
           <div className='star-rating'>
-          <span class="material-symbols-outlined">star_rate</span>
-            {/* <span className='star'>Star Rating: </span> */}
-            <span className={avgStarRating ? '' : 'new-rating'}>{avgStarRating ? avgStarRating : 'New!'}</span>
+            <span className='spot-city-and-state'>{city}, {state}</span>
+            <div className="star-and-rating">
+
+              <span className="material-symbols-outlined">star_rate</span>
+              <span className={avgRating ? '' : 'new-rating'}>{avgRating ? `${Number(avgRating).toFixed(2)}` : 'New!'}</span>
+            </div>
           </div>
         </div>
         <div className='spot-price-container'>
-          <span className='spot-price'>${price}</span>
-          <span className='night-text'>/night</span>
+          <span className='spot-price'>${Number(price).toFixed(2)}</span>
+          <span className='night-text'> night</span>
         </div>
       </div>
     </div>

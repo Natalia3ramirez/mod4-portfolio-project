@@ -13,14 +13,14 @@ export const DeleteReviewModalButton = ({reviewId, spotId}) => {
   // const spot = useSelector(state => (state.spot.singleSpot))
 
   const { closeModal } = useModal()
-  const reload=()=>window.location.reload()
+
 
   const onClick = (e) => {
     e.preventDefault();
-    return dispatch(thunkDeleteReview(reviewId))
+    dispatch(thunkDeleteReview(reviewId))
     .then(dispatch(thunkGetSpotInfo(spotId)))
     .then(closeModal)
-    .then(reload())
+  
   }
 
 
