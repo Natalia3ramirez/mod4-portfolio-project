@@ -53,7 +53,7 @@ export const SingleSpotInformation = () => {
               <img className='spot-preview-image' src={imagePreview.url} alt="" />
             </div>
             <div className='four-image-container'>
-              {additionalImages.slice(0, 5).map((spot) => (
+              {additionalImages.map((spot) => (
                 <img src={spot.url} key={spot.id} className='four-images' alt='name' />
               ))}
             </div>
