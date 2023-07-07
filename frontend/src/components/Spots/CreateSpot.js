@@ -152,7 +152,7 @@ export const CreateSpot = ({user}) => {
         <p className='form-input-errors'>{errors.price}</p>
       </div>
 
-      <div className='create-spot__header'>
+      <div className='create-spot-header'>
         <h3>Liven up your spot with photos</h3>
         <p>Submit a link to at least one photo to publish your spot.</p>
         <input

@@ -28,6 +28,10 @@ export const ManageSpots = () => {
     history.push('/spots/new')
   }
 
+  const updateSpot = (spotId) => {
+    history.push(`/spots/${spotId}/edit`)
+  }
+
   return (
     <>
       <div className='creat-new-spot-container'>
@@ -38,6 +42,7 @@ export const ManageSpots = () => {
             <SingleSpotDetails manage={true} spot={spot} />
             <div className='delete-button'>
               <OpenModalButton buttonText='Delete' modalComponent={<DeleteSpotModal spotId={spot.id}/>} />
+              <button onClick={updateSpot} className="edit-spot-button">Update</button>
             </div>
           </div>))}
         </div>

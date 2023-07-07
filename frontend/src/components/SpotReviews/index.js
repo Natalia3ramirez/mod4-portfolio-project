@@ -3,6 +3,7 @@ import { SingleSpotInformation } from '../SingleSpotInformation';
 import { DeleteReviewModalButton } from './DeleteReviewModalButton';
 import OpenModalButton from '../OpenModalButton';
 import './SpotReviews.css'
+import { CreateReviewModalButton } from './CreateReviewModalButton';
 
 
 
@@ -22,10 +23,15 @@ export const SpotReviews = () => {
   }
 
   const {  avgStarRating, numReviews} = spot
+  const previousReview = user && reviewsList.find((review) => review.User.id === user.id)
 
   return (
     <div>
         <SingleSpotInformation />
+        <div className='post-review-container'>
+        {!previousReview && (spot.ownerId !== user?.id) &&
+              <OpenModalButton buttonText='Post Your Review' modalComponent={<CreateReviewModalButton spot={spot} user={user} />} />}
+        </div>
       <div>
       <h2 className='stars'><span className="material-symbols-outlined">star_rate</span>{avgStarRating} · {numReviews} {numReviews > 1 ? "Reviews" : "Review"}</h2>
         {reviewsList.map((review) => (
@@ -35,6 +41,7 @@ export const SpotReviews = () => {
             <p>{review.review}</p>
             {(review.userId === user?.id) &&
               <OpenModalButton buttonText='Delete Review' modalComponent={<DeleteReviewModalButton reviewId={review.id} spotId={spot.id} />} />}
+
           </div>
 
         ))}

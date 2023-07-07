@@ -2,7 +2,7 @@ import { csrfFetch } from "./csrf";
 
 
 const GET_SPOT_REVIEWS = 'spots/spot/getSpotReviews';
-// const CREATE_REVIEW = 'spots/spot/createReview';
+const CREATE_REVIEW = 'spots/spot/createReview';
 const DELETE_REVIEW = 'spots/spot/deleteReview';
 
 const getSpotReviews = (reviews) => {
@@ -12,12 +12,12 @@ const getSpotReviews = (reviews) => {
   }
 }
 
-// const createReview = (spotId) => {
-//   return {
-//     type: CREATE_REVIEW,
-//     review
-//   }
-// }
+const createReview = (review) => {
+  return {
+    type: CREATE_REVIEW,
+    review
+  }
+}
 const deleteReview = (reviewId) => {
   return {
     type: DELETE_REVIEW,
@@ -40,14 +40,22 @@ export const thunkGetSpotReviews = (spotId) => async (dispatch) => {
   }
 }
 
-// export const thunkCreateReview = (review) => {
-//   const response = await csrfFetch(`/api/spots/${spotId}/reviews`);
-
-//   if (response.ok) {
-
-//     return response
-//   }
-// }
+export const thunkCreateReview = (review, spotId, user) => async (dispatch) => {
+  const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
+    method: "POST",
+    body: JSON.stringify(review)
+  })
+  if (response.ok) {
+    const newReview = await response.json()
+    newReview.User = { id: user.id, firstName: user.firsName, lastName: user.lastName};
+    newReview.ReviewImages = []
+    dispatch(createReview(newReview))
+    return newReview
+  } else {
+    const errors = await response.json();
+    return errors
+  }
+}
 
 export const thunkDeleteReview = (reviewId) => async (dispatch) => {
   const response = await csrfFetch(`/api/reviews/${reviewId}`, {
@@ -76,6 +84,11 @@ export default function reviewsReducer(state = initialState, action) {
     case DELETE_REVIEW:
       newState = {...state, spot: {...state.spot}}
       delete newState.spot[action.reviewId]
+      return newState
+
+    case CREATE_REVIEW:
+      newState = { ...state, spot: { ...state.spot }, user: { ...state.user, ...action.review}}
+      newState.spot[action.review.id] = action.review
       return newState
     default:
       return state;
