@@ -1,39 +1,50 @@
 import './Spots.css'
 import React, {useState, useEffect} from 'react'
-import { useDispatch} from 'react-redux'
+import { useDispatch, useSelector} from 'react-redux'
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
 import { useParams } from 'react-router-dom/cjs/react-router-dom.min'
 import { thunkGetSpotInfo, thunkUpdateSpot } from '../../store/spots'
 
 
+
+
 export const UpdateSpot = ({ spot }) => {
   const dispatch = useDispatch();
-  const history = useHistory
-  const {spotId} = useParams();
+  const history = useHistory()
+  // const {spotId} = useParams()
 
 
-  // const spot = useSelector(state =>  state.spot.singleSpot)
-
+  // const spot = useSelector(state => (state.spot.singleSpot))
+ console.log("this is the spot", spot)
 
   const [address, setAddress] = useState(spot?.address);
   const [city, setCity] = useState(spot?.city);
   const [state, setState] = useState(spot?.state);
   const [country, setCountry] = useState(spot?.country);
-  const [lat] = useState(33.7078 );
-  const [lng] = useState(-117.7679);
   const [name, setName] = useState(spot?.name);
   const [description, setDescription] = useState(spot?.description);
   const [price, setPrice] = useState(spot?.price);
   const [errors, setErrors] = useState({});
+  const [submitted, setSubmitted] = useState(false)
+
+  // useEffect(() => {
+  //   setAddress(spot.address)
+  //   setCity(spot.city)
+  //   setState(spot.state)
+  //   setCountry(spot.country)
+  //   setName(spot.name)
+  //   setDescription(spot.description)
+  //   setPrice(spot.price)
+
+  // }, [spot])
+
+  // useEffect(() => {
+  //   dispatch(thunkGetSpotInfo(spotId))
+  // }, [])
+
 
   useEffect(() => {
-    dispatch(thunkGetSpotInfo(spotId))
-
-  }, [spotId, dispatch])
-
-
-  useEffect(() => {
-     const errors = {}
+    const errors = {}
 
     if(!address) errors.address = "Please enter valid address"
     if(!city) errors.city = "Please enter valid city"
@@ -45,23 +56,26 @@ export const UpdateSpot = ({ spot }) => {
 
     setErrors(errors)
   }, [address, city, state, country, name, description, price] )
-
-  if(!spot) return null
+//  console.log("this is the spot", spot)
+  if(!spot) {
+    history.push('/')
+  }
 
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    if(!Object.values(errors).length) {
-      let updateSpot = { address, city, state, country, name, description, price }
-      const oneSpot = await dispatch(thunkUpdateSpot(updateSpot, spotId))
-      if(oneSpot.errors) setErrors(oneSpot.errors)
+    setSubmitted(true)
 
-      if(!oneSpot) {
-        await history.push('/')
-      }
+    console.log("these are the errors", errors)
+    if(!Object.values(errors).length) {
+      let updateSpot = { address, city, state, country, name, description, price, lat: 90, lng: 90 }
+     await dispatch(thunkUpdateSpot(updateSpot, spot.id))
+      history.push(`/spots/${spot.id}`)
+
 
     } else {
-      await history.push(`/spots/${spot.id}`)
+      console.log("we made it!")
+      history.push('/')
     }
 
   }

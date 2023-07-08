@@ -7,6 +7,7 @@ import { Spots } from "./components/Spots";
 import { SpotReviews } from "./components/SpotReviews";
 import { ManageSpots } from "./components/ManageSpots";
 import { CreateSpot } from "./components/Spots/CreateSpot";
+import { GetSpotToUpdate } from "./components/Spots/GetSpotToUpdate";
 import { UpdateSpot } from "./components/Spots/UpdateSpot";
 
 function App() {
@@ -30,8 +31,8 @@ function App() {
         <Route path='/spots/new'>
           <CreateSpot />
         </Route>
-        <Route path="/spots/:id/edit">
-          <UpdateSpot />
+        <Route path="/spots/:spotId/edit">
+          <GetSpotToUpdate />
         </Route>
         <Route exact path='/spots/:spotId'>
           <SpotReviews  />

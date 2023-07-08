@@ -4,5 +4,12 @@
 
 
 .rating-input .empty {
-  fill: gray 
+  color: gray
 }
+
+
+.rating-input {
+  display: flex;
+  margin-right: 4px;
+}
+

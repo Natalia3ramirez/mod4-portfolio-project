@@ -9,18 +9,15 @@ import { thunkGetSpotInfo } from '../../store/spots';
 
 export const DeleteReviewModalButton = ({reviewId, spotId}) => {
   const dispatch = useDispatch()
-  // const history = useHistory()
-  // const spot = useSelector(state => (state.spot.singleSpot))
 
   const { closeModal } = useModal()
 
-
   const onClick = (e) => {
     e.preventDefault();
-    dispatch(thunkDeleteReview(reviewId))
-    .then(dispatch(thunkGetSpotInfo(spotId)))
+    dispatch(thunkDeleteReview(reviewId, spotId))
+    .then(() => dispatch(thunkGetSpotInfo(spotId)))
     .then(closeModal)
-  
+
   }
 
 

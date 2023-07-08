@@ -15,11 +15,10 @@ export const SingleSpotInformation = () => {
   const { spotId } = useParams();
   const oneSpot = useSelector(state => (state.spot.singleSpot))
   const reviews = useSelector(state => state.review.spot)
-  const oneSpotList = Object.keys(oneSpot)
 
 
+  const user = useSelector(state =>state.session.user)
 
-  const reviewsList = Object.values(reviews).reverse()
 
   useEffect(() => {
     dispatch(thunkGetSpotInfo(spotId))
@@ -31,7 +30,9 @@ export const SingleSpotInformation = () => {
   }, [dispatch, spotId])
 
 
-  if (oneSpotList.length < 1) return null;
+  if (!oneSpot.id) return null;
+  if(!reviews[spotId]) return null
+  const reviewsList = Object.values(reviews[spotId]).reverse()
 
 
   const { name, Owner, city, state, country, SpotImages, description, avgStarRating, numReviews, price } = oneSpot
@@ -40,6 +41,16 @@ export const SingleSpotInformation = () => {
   const imagePreview = SpotImages.find(image => image.preview) || SpotImages[0]
   const additionalImages = SpotImages.filter(image => !image.preview)
 
+  const checkForOwner = user && user.id === oneSpot.Owner.id
+  console.log("array of reviews", reviewsList)
+  const checkForReview = user && reviewsList.find((review) => review.userId === user.id)
+
+  const getDate = (date ) => {
+    const newDate = new Date(date);
+    const month = newDate.toLocaleString('default', {month: 'long'});
+    const year = newDate.toLocaleDateString('default', { year: 'numeric'})
+    return `${month} ${year}`
+  }
 
 
   return (
@@ -76,8 +87,6 @@ export const SingleSpotInformation = () => {
               <OpenModalButton buttonText='Reserve' modalComponent={<ReserveModal />} />
             </div>
           </div>
-        </div>
-        <div>
         </div>
       </div>
     </>

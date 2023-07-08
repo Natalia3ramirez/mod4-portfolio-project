@@ -2,26 +2,26 @@ import { csrfFetch } from "./csrf";
 
 
 const GET_SPOT_REVIEWS = 'spots/spot/getSpotReviews';
-const CREATE_REVIEW = 'spots/spot/createReview';
 const DELETE_REVIEW = 'spots/spot/deleteReview';
+const CLEAN_UP_REVIEWS = 'reviews/cleanupReviews'
 
-const getSpotReviews = (reviews) => {
+const getSpotReviews = (reviews, spotId) => {
   return {
     type: GET_SPOT_REVIEWS,
-    reviews
+    reviews, spotId
   }
 }
 
-const createReview = (review) => {
-  return {
-    type: CREATE_REVIEW,
-    review
-  }
-}
-const deleteReview = (reviewId) => {
+
+const deleteReview = (reviewId, spotId) => {
   return {
     type: DELETE_REVIEW,
-    reviewId
+    reviewId, spotId
+  }
+}
+export const cleanupReviews = () => {
+  return {
+    type: CLEAN_UP_REVIEWS
   }
 }
 
@@ -32,7 +32,8 @@ export const thunkGetSpotReviews = (spotId) => async (dispatch) => {
 
   if (response.ok) {
     const reviews = await response.json();
-    dispatch(getSpotReviews(reviews.Reviews));
+    console.log("thunk review", reviews)
+    dispatch(getSpotReviews(reviews.Reviews, spotId));
     return response
   }else {
     const errors = await response.json();
@@ -41,28 +42,29 @@ export const thunkGetSpotReviews = (spotId) => async (dispatch) => {
 }
 
 export const thunkCreateReview = (review, spotId, user) => async (dispatch) => {
-  const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
-    method: "POST",
-    body: JSON.stringify(review)
+  console.log("id from thunk", spotId)
+  try {
+    const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
+      method: "POST",
+      body: JSON.stringify(review)
   })
-  if (response.ok) {
     const newReview = await response.json()
     newReview.User = { id: user.id, firstName: user.firsName, lastName: user.lastName};
     newReview.ReviewImages = []
-    dispatch(createReview(newReview))
+    dispatch(thunkGetSpotReviews(spotId))
     return newReview
-  } else {
-    const errors = await response.json();
+ } catch (e) {
+    const errors = await e.json();
     return errors
   }
 }
 
-export const thunkDeleteReview = (reviewId) => async (dispatch) => {
+export const thunkDeleteReview = (reviewId, spotId) => async (dispatch) => {
   const response = await csrfFetch(`/api/reviews/${reviewId}`, {
     method: "DELETE"
   })
   const data = await response.json()
-  dispatch(deleteReview(reviewId))
+  dispatch(thunkGetSpotReviews(spotId))
   return data
 }
 
@@ -76,20 +78,20 @@ export default function reviewsReducer(state = initialState, action) {
   let newState;
   switch (action.type) {
     case GET_SPOT_REVIEWS:
-      newState = { ...state, spot: {} }
+      newState = { ...state, spot: { ...state.spot} }
+      newState.spot[action.spotId] = {}
       action.reviews.forEach(review => {
-        newState.spot[review.id] = review
+        newState.spot[action.spotId][review.id] = review
       });
       return newState
     case DELETE_REVIEW:
       newState = {...state, spot: {...state.spot}}
-      delete newState.spot[action.reviewId]
+      delete newState.spot[action.spotId][action.reviewId]
       return newState
 
-    case CREATE_REVIEW:
-      newState = { ...state, spot: { ...state.spot }, user: { ...state.user, ...action.review}}
-      newState.spot[action.review.id] = action.review
-      return newState
+   case CLEAN_UP_REVIEWS:
+    return initialState
+
     default:
       return state;
   }

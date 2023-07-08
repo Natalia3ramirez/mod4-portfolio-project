@@ -1,19 +1,30 @@
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { SingleSpotInformation } from '../SingleSpotInformation';
 import { DeleteReviewModalButton } from './DeleteReviewModalButton';
 import OpenModalButton from '../OpenModalButton';
 import './SpotReviews.css'
 import { CreateReviewModalButton } from './CreateReviewModalButton';
+import { useParams } from 'react-router-dom';
+import { thunkGetSpotReviews } from '../../store/reviews';
+import { useEffect } from 'react';
 
 
 
 export const SpotReviews = () => {
-
+  const {spotId} = useParams()
   const reviews = useSelector(state =>  state.review.spot)
-  const reviewsList = Object.values(reviews)
-
+  console.log("these are the spotreviews", reviews)
   const spot = useSelector(state => (state.spot.singleSpot))
   const user = useSelector(state => state.session.user)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    dispatch(thunkGetSpotReviews(spotId))
+  }, [dispatch])
+
+  if(!reviews[spotId]) return null
+  const reviewsList = Object.values(reviews[spotId])
+  console.log("this is the reviewsList", reviewsList)
 
   const generateDate = (date) => {
     const event = new Date(date);
@@ -23,8 +34,8 @@ export const SpotReviews = () => {
   }
 
   const {  avgStarRating, numReviews} = spot
-  const previousReview = user && reviewsList.find((review) => review.User.id === user.id)
-
+  console.log("this is my review list", reviewsList)
+  const previousReview = user && reviewsList.find((review) => review.userId === user.id)
   return (
     <div>
         <SingleSpotInformation />
