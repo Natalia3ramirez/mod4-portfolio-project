@@ -13,3 +13,23 @@
   margin-right: 4px;
 }
 
+.post-review-container > button {
+  margin-bottom: 17px;
+  width: 140px;
+  height: 25px;
+  border-radius: 5px;
+  border: 1px solid rgb(250, 78, 30);
+  background-color: rgb(250, 78, 30);
+  color: white
+}
+
+
+.delete-button-container > button {
+  margin-bottom: 17px;
+  width: 100px;
+  height: 25px;
+  border-radius: 5px;
+  border: 1px solid rgb(250, 78, 30);
+  background-color: rgb(250, 78, 30);
+  color: white
+}

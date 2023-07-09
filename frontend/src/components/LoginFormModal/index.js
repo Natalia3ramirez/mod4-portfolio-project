@@ -14,10 +14,10 @@ function LoginFormModal() {
   useEffect(() => {
     const errors = {}
 
-    if(credential.length < 4) {
+    if (credential.length < 4) {
       errors.credential = "Username must be 4 characters or more"
     }
-    if(password.length < 6) {
+    if (password.length < 6) {
       errors.password = "Password must be 6 characters or more"
     }
 
@@ -39,42 +39,54 @@ function LoginFormModal() {
 
   const demoUser = (e) => {
     e.preventDefault();
-    return dispatch(sessionActions.login({ credential: "Demo-lition", password: "password"}))
-    .then(closeModal)
+    return dispatch(sessionActions.login({ credential: "Demo-lition", password: "password" }))
+      .then(closeModal)
   }
 
   return (
-    <>
-      <h1>Log In</h1>
+
+    <div className='login-form-container'>
+      <h1 className='login-modal'>Log In</h1>
       <form onSubmit={handleSubmit}>
-        <label>
-          Username or Email
-          <input
-            type="text"
-            value={credential}
-            onChange={(e) => setCredential(e.target.value)}
-            required
-          />
-        </label>
-        <label>
-          Password
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </label>
-        {errors.credential && credential.length > 0 && (
-          <p className='on-submit-errors'>{errors.credential}</p>
-        )}
-        {errors.password && password.length > 0 && (
-          <p className='on-submit-errors'>{errors.password}</p>
-        )}
-        <button disabled={Object.keys(errors).length > 0} type="submit">Log In</button>
+        <div className='username-password'>
+          <div className='username-or-email'>
+            <label>
+              <input
+                type="text"
+                value={credential}
+                placeholder="Username or Email"
+                onChange={(e) => setCredential(e.target.value)}
+                required
+              />
+            </label>
+          </div>
+          <div className='enter-password'>
+            <label>
+              <input
+                type="password"
+                value={password}
+                placeholder="Password"
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
+            </label>
+          </div>
+        </div>
+        <div className='errors-and-login'>
+          {errors.credential && credential.length > 0 && (
+            <p className='on-submit-errors'>{errors.credential}</p>
+          )}
+          {errors.password && password.length > 0 && (
+            <p className='on-submit-errors'>{errors.password}</p>
+          )}
+        </div>
+        <div className='login-and-demo-user'>
+          <button className='submit-login' disabled={Object.keys(errors).length > 0} type="submit">Log In</button>
+          <button onClick={demoUser} className="demo-user-button">Demo User</button>
+        </div>
       </form>
-      <button onClick={demoUser} className="demo-user-button">Demo User</button>
-    </>
+    </div>
+
   );
 }
 

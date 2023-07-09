@@ -5,7 +5,6 @@ import { thunkGetSpotInfo } from '../../store/spots';
 import OpenModalButton from "../OpenModalButton";
 import ReserveModal from '../ReserveModal';
 import { thunkGetSpotReviews } from '../../store/reviews';
-// import { SpotReviews } from '../SpotReviews';
 import './SingleSpotInformation.css'
 
 
@@ -43,15 +42,6 @@ export const SingleSpotInformation = () => {
   const additionalImages = SpotImages.filter(image => !image.preview)
 
 
-
-  // const getDate = (date ) => {
-  //   const newDate = new Date(date);
-  //   const month = newDate.toLocaleString('default', {month: 'long'});
-  //   const year = newDate.toLocaleDateString('default', { year: 'numeric'})
-  //   return `${month} ${year}`
-  // }
-
-
   return (
     <div>
       <div className='spot-details-page'>
@@ -70,22 +60,24 @@ export const SingleSpotInformation = () => {
               </div>
             </div>
           </div>
-          <div className='spot-name-description'>
-            <h3>Hosted by {Owner.firstName} {Owner.lastName}</h3>
-            <h4>{description}</h4>
-          </div>
-          <div className='reserve-box'>
-            <h3>${Number(price).toFixed(2)} night</h3>
-            {reviewsList.length ?
-              <div>
-                <h4 className='stars'><span className="material-symbols-outlined">star_rate</span>{Number(avgStarRating).toFixed(1)} · {numReviews} {numReviews > 1 ? "Reviews" : "Review"}</h4>
+          <div className='description-reserve-container'>
+            <div className='spot-name-description'>
+              <h3>Hosted by {Owner.firstName} {Owner.lastName}</h3>
+              <p>{description}</p>
+            </div>
+            <div className='reserve-box'>
+              <div className='reviews-price-container'>
+
+                <h4 className='price-per-night-reserve'>${Number(price).toFixed(2)} night</h4>
+                {reviewsList.length ?
+                  <h5 className='stars star-and-reviews'><span className="material-symbols-outlined">star_rate</span>{Number(avgStarRating).toFixed(1)} · {numReviews} {numReviews > 1 ? "Reviews" : "Review"}</h5>
+                  :
+                  <h5 className='stars star-and-reviews' ><span className="material-symbols-outlined">star_rate</span> New</h5>
+                }
               </div>
-              :
-              <div>
-                <h4 className='stars' ><span className="material-symbols-outlined">star_rate</span> New</h4>
-              </div>}
-            <div className='reserve-modal'>
-              <OpenModalButton buttonText='Reserve' modalComponent={<ReserveModal />} />
+              <div className='reserve-modal'>
+                <OpenModalButton buttonText='Reserve' modalComponent={<ReserveModal />} />
+              </div>
             </div>
           </div>
         </div>

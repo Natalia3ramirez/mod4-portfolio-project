@@ -1,0 +1,35 @@
+.manage-spot-container {
+  margin-left: 45px;
+  margin-right: 45px;
+}
+
+.manage-spot-container > button {
+  margin-bottom: 17px;
+  width: 150px;
+  height: 30px;
+  border-radius: 5px;
+  border: 1px solid rgb(250, 78, 30);
+  background-color: rgb(250, 78, 30);
+  color: white;
+  margin-top: 10px;
+  box-shadow: 0.5rem 0.5rem 2rem #d3d3d3;
+}
+
+.manage-spot-container > h1 {
+  margin-bottom: 0px
+}
+
+.delete-button > button {
+  margin-bottom: 17px;
+  width: 65px;
+  height: 22px;
+  border-radius: 5px;
+  border: 1px solid rgb(250, 78, 30);
+  background-color: rgb(250, 78, 30);
+  color: white;
+  margin-top: 10px;
+  margin-right: 5px;
+
+}
+
+

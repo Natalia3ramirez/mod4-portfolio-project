@@ -1,0 +1,103 @@
+
+
+.login-form-container {
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+  height: 300px;
+  align-items: center;
+  /* align-content: space-between; */
+
+}
+.username-password {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+
+.username-or-email {
+  padding-bottom: 7px;
+}
+
+.enter-password {
+  padding-bottom: 7px;
+  margin-bottom: 10px
+}
+
+
+.submit-login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 17px;
+  width: 157px;
+  height: 30px;
+  border-radius: 5px;
+  border: 1px solid rgb(250, 78, 30);
+  background-color: rgb(250, 78, 30);
+  color: white;
+  margin-top: 10px;
+
+}
+
+
+.login-modal:hover,
+.signup-modal:hover {
+  cursor: pointer
+}
+
+.demo-user-button {
+  border: none;
+  background-color: white;
+  text-decoration: underline;
+  color: rgb(29, 77, 132)
+}
+
+.login-modal > li {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 17px;
+  width: 100%;
+  height: 30px;
+  border-radius: 5px;
+  border: 1px solid rgb(250, 78, 30);
+  background-color: rgb(250, 78, 30);
+  color: white;
+  margin-top: 10px;
+  text-align: center
+}
+
+
+
+
+
+.profile-dropdown {
+  width: 150px;
+  padding-top: 15px;
+
+}
+
+.profile-dropdown {
+  list-style-type: none;
+  position: absolute;
+  right: 55px;
+  top: 60px;
+  border: 1px solid #CCCCCC;
+  border-radius: 5px;
+  padding-left: 0px;
+  background-color: white;
+  padding-left: 15px;
+  padding-right: 10px;
+
+}
+
+
+.login-and-demo-user {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+}
+

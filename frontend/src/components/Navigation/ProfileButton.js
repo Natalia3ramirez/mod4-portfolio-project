@@ -47,7 +47,7 @@ function ProfileButton({ user }) {
   return (
     <>
 
-    {user ? (<span><NavLink className="user-create-new-spot" to='/spots/new'>Create a New Spot</NavLink></span>) : ("")}
+      {user ? (<span><NavLink className="user-create-new-spot" to='/spots/new'>Create a New Spot</NavLink></span>) : ("")}
       <button className='user-button-container' onClick={openMenu}>
         <span className="material-symbols-outlined">menu</span>
         <i className="fas fa-user-circle" />
@@ -58,24 +58,28 @@ function ProfileButton({ user }) {
             <li>Hello, {user.firstName}</li>
             <li>{user.email}</li>
             <li>
-            <NavLink to="/spots/current" className='user-manage-spots'>Manage Spots</NavLink>
+              <NavLink to="/spots/current" className='user-manage-spots'>Manage Spots</NavLink>
             </li>
-            <li>
+            <li className='logout-button-container'>
               <button className='logout-button' onClick={logout}>Log Out</button>
             </li>
           </>
         ) : (
           <>
-            <OpenModalMenuItem
-              itemText="Log In"
-              onItemClick={closeMenu}
-              modalComponent={<LoginFormModal />}
-            />
-            <OpenModalMenuItem
-              itemText="Sign Up"
-              onItemClick={closeMenu}
-              modalComponent={<SignupFormModal />}
-            />
+            <div className='login-modal'>
+              <OpenModalMenuItem
+                itemText="Log In"
+                onItemClick={closeMenu}
+                modalComponent={<div className='login-form-modal-container'><LoginFormModal /></div>}
+              />
+            </div>
+            <div className='signup-modal'>
+              <OpenModalMenuItem
+                itemText="Sign Up"
+                onItemClick={closeMenu}
+                modalComponent={<SignupFormModal />}
+              />
+            </div>
           </>
         )}
       </ul>
