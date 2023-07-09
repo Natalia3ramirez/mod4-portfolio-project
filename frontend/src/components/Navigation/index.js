@@ -3,6 +3,7 @@ import { NavLink, useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
 import './Navigation.css';
+import relaxrnr from './Logo/relaxrnr.png'
 
 function Navigation({ isLoaded }){
   const sessionUser = useSelector(state => state.session.user);
@@ -17,7 +18,9 @@ function Navigation({ isLoaded }){
     <>
     <ul className='nav-list'>
       <li>
-        <NavLink exact to="/"><img className='logo' src="../icon/relaxrnr-high-resolution-logo-color-on-transparent-background.png" alt="RelaxRnR" onClick={handleLogoClick}/></NavLink>
+        <NavLink exact to="/" activeClassName='logo' onClick={handleLogoClick}>
+          <img src={relaxrnr} className='logo' />
+        </NavLink>
       </li>
       {isLoaded && (
         <li id='profile-button'>

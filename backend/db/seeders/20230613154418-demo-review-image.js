@@ -17,10 +17,7 @@ module.exports = {
     */
     options.tableName = 'ReviewImages';
     return queryInterface.bulkInsert(options, [
-      {
-        reviewId: 1,
-        url: "https://tinyurl.com/48xphkut"
-      },
+
       {
         reviewId: 4,
         url: "https://tinyurl.com/ahp8euz3"
@@ -72,10 +69,6 @@ module.exports = {
       {
         reviewId: 40,
         url: "https://tinyurl.com/mvdeydfj"
-      },
-      {
-        reviewId: 43,
-        url: "https://tinyurl.com/3ad7ydd4"
       }
     ], {})
   },

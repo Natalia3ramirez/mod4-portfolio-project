@@ -22,8 +22,8 @@ function SignupFormModal() {
     if(email.length < 1) {
       errors.email = "Email field cannot be empty"
     }
-    if(username.length < 1) {
-      errors.username = "Username field cannot be empty"
+    if(username.length < 4) {
+      errors.username = "Username field must be at least 4 characters"
     }
     if(firstName.length < 1) {
       errors.firstName = "First Name field cannot be empty"
@@ -31,8 +31,8 @@ function SignupFormModal() {
     if(lastName.length < 1) {
       errors.lastName= "Last Name field cannot be empty"
     }
-    if(password.length < 1) {
-      errors.password = "Password field cannot be empty"
+    if(password.length < 6) {
+      errors.password = "Password must be at least 6 characters"
     }
     if(confirmPassword.length < 1) {
       errors.confirmPassword = "Confirm Password field cannot be empty"
@@ -80,7 +80,7 @@ function SignupFormModal() {
             required
           />
         </label>
-        {errors.email && email.length > 0 &&(<p>{errors.email}</p>)}
+        {errors.email && email.length > 0 && <p className='on-submit-errors'>{errors.email}</p>}
         <label>
           Username
           <input
@@ -90,7 +90,7 @@ function SignupFormModal() {
             required
           />
         </label>
-        {errors.username && username.length > 0 && <p>{errors.username}</p>}
+        {errors.username && username.length > 0 && <p className='on-submit-errors'>{errors.username}</p>}
         <label>
           First Name
           <input
@@ -100,7 +100,7 @@ function SignupFormModal() {
             required
           />
         </label>
-        {errors.firstName && firstName.length > 0 &&<p>{errors.firstName}</p>}
+        {errors.firstName && firstName.length > 0 &&<p className='on-submit-errors'>{errors.firstName}</p>}
         <label>
           Last Name
           <input
@@ -110,7 +110,7 @@ function SignupFormModal() {
             required
           />
         </label>
-        {errors.lastName && lastName.length > 0 &&(<p>{errors.lastName}</p>)}
+        {errors.lastName && lastName.length > 0 &&(<p className='on-submit-errors'>{errors.lastName}</p>)}
         <label>
           Password
           <input
@@ -120,7 +120,7 @@ function SignupFormModal() {
             required
           />
         </label>
-        {errors.password && password.length > 0 && (<p>{errors.password}</p>)}
+        {errors.password && password.length > 0 && (<p className='on-submit-errors'>{errors.password}</p>)}
         <label>
           Confirm Password
           <input
@@ -131,7 +131,7 @@ function SignupFormModal() {
           />
         </label>
         {errors.confirmPassword && confirmPassword.length > 0 && (
-          <p>{errors.confirmPassword}</p>
+          <p className='on-submit-errors'>{errors.confirmPassword}</p>
         )}
         <button disabled={Object.keys(errors).length > 0} type="submit" >Sign Up</button>
       </form>

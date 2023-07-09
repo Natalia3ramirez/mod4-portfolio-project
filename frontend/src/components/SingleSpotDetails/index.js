@@ -30,9 +30,9 @@ export const SingleSpotDetails = ({ spot }) => {
           <div className='star-rating'>
             <span className='spot-city-and-state'>{city}, {state}</span>
             <div className="star-and-rating">
-
               <span className="material-symbols-outlined">star_rate</span>
-              <span className={avgRating ? '' : 'new-rating'}>{avgRating ? `${Number(avgRating).toFixed(2)}` : 'New!'}</span>
+
+              <span className='rating'>{avgRating ? `${Number(avgRating).toFixed(1)}` : 'New!'}</span>
             </div>
           </div>
         </div>

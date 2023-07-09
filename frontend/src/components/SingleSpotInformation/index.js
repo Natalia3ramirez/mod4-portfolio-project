@@ -17,7 +17,8 @@ export const SingleSpotInformation = () => {
   const reviews = useSelector(state => state.review.spot)
 
 
-  const user = useSelector(state =>state.session.user)
+
+  const user = useSelector(state => state.session.user)
 
 
   useEffect(() => {
@@ -31,7 +32,7 @@ export const SingleSpotInformation = () => {
 
 
   if (!oneSpot.id) return null;
-  if(!reviews[spotId]) return null
+  if (!reviews[spotId]) return null
   const reviewsList = Object.values(reviews[spotId]).reverse()
 
 
@@ -41,47 +42,47 @@ export const SingleSpotInformation = () => {
   const imagePreview = SpotImages.find(image => image.preview) || SpotImages[0]
   const additionalImages = SpotImages.filter(image => !image.preview)
 
-  const checkForOwner = user && user.id === oneSpot.Owner.id
-  console.log("array of reviews", reviewsList)
-  const checkForReview = user && reviewsList.find((review) => review.userId === user.id)
 
-  const getDate = (date ) => {
-    const newDate = new Date(date);
-    const month = newDate.toLocaleString('default', {month: 'long'});
-    const year = newDate.toLocaleDateString('default', { year: 'numeric'})
-    return `${month} ${year}`
-  }
+
+  // const getDate = (date ) => {
+  //   const newDate = new Date(date);
+  //   const month = newDate.toLocaleString('default', {month: 'long'});
+  //   const year = newDate.toLocaleDateString('default', { year: 'numeric'})
+  //   return `${month} ${year}`
+  // }
 
 
   return (
-    <>
+    <div>
       <div className='spot-details-page'>
         <h1>{name}</h1>
+        <h3>{city}, {state}, {country}</h3>
         <div>
-          <h3>{city}, {state}, {country}</h3>
-          <div className='spot-images'>
-            <div className="preview-image-conatiner">
-              <img className='spot-preview-image' src={imagePreview.url} alt="" />
-            </div>
-            <div className='four-image-container'>
-              {additionalImages.map((spot) => (
-                <img src={spot.url} key={spot.id} className='four-images' alt='name' />
-              ))}
+          <div className='container-for-images'>
+            <div className='spot-images'>
+              <div className="preview-image-conatiner">
+                <img className='spot-preview-image' src={imagePreview.url} alt="" />
+              </div>
+              <div className='four-image-container'>
+                {additionalImages.map((spot) => (
+                  <img src={spot.url} key={spot.id} className='four-images' alt='name' />
+                ))}
+              </div>
             </div>
           </div>
           <div className='spot-name-description'>
-            <h2>{Owner.firstName} {Owner.lastName}</h2>
-            <h3>{description}</h3>
+            <h3>Hosted by {Owner.firstName} {Owner.lastName}</h3>
+            <h4>{description}</h4>
           </div>
           <div className='reserve-box'>
-            <h2>${Number(price).toFixed(2)} per night</h2>
+            <h3>${Number(price).toFixed(2)} night</h3>
             {reviewsList.length ?
               <div>
-                <h4 className='stars'><span className="material-symbols-outlined">star_rate</span>{avgStarRating} · {numReviews} {numReviews > 1 ? "Reviews" : "Review"}</h4>
+                <h4 className='stars'><span className="material-symbols-outlined">star_rate</span>{Number(avgStarRating).toFixed(1)} · {numReviews} {numReviews > 1 ? "Reviews" : "Review"}</h4>
               </div>
               :
               <div>
-                <h4 className='stars'>New</h4>
+                <h4 className='stars' ><span className="material-symbols-outlined">star_rate</span> New</h4>
               </div>}
             <div className='reserve-modal'>
               <OpenModalButton buttonText='Reserve' modalComponent={<ReserveModal />} />
@@ -89,7 +90,7 @@ export const SingleSpotInformation = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   )
 }
 

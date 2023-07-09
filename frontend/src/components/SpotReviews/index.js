@@ -11,9 +11,8 @@ import { useEffect } from 'react';
 
 
 export const SpotReviews = () => {
-  const {spotId} = useParams()
-  const reviews = useSelector(state =>  state.review.spot)
-  console.log("these are the spotreviews", reviews)
+  const { spotId } = useParams()
+  const reviews = useSelector(state => state.review.spot)
   const spot = useSelector(state => (state.spot.singleSpot))
   const user = useSelector(state => state.session.user)
   const dispatch = useDispatch()
@@ -22,9 +21,8 @@ export const SpotReviews = () => {
     dispatch(thunkGetSpotReviews(spotId))
   }, [dispatch])
 
-  if(!reviews[spotId]) return null
-  const reviewsList = Object.values(reviews[spotId])
-  console.log("this is the reviewsList", reviewsList)
+  if (!reviews[spotId]) return null
+  const reviewsList = Object.values(reviews[spotId]).reverse()
 
   const generateDate = (date) => {
     const event = new Date(date);
@@ -33,29 +31,43 @@ export const SpotReviews = () => {
     return `${month} ${year}`
   }
 
-  const {  avgStarRating, numReviews} = spot
-  console.log("this is my review list", reviewsList)
+  const { avgStarRating, numReviews } = spot
   const previousReview = user && reviewsList.find((review) => review.userId === user.id)
+
+
   return (
-    <div>
-        <SingleSpotInformation />
-        <div className='post-review-container'>
-        {!previousReview && (spot.ownerId !== user?.id) &&
-              <OpenModalButton buttonText='Post Your Review' modalComponent={<CreateReviewModalButton spot={spot} user={user} />} />}
-        </div>
+    <div className='single-spot-detaile'>
+      <SingleSpotInformation />
       <div>
-      <h2 className='stars'><span className="material-symbols-outlined">star_rate</span>{avgStarRating} · {numReviews} {numReviews > 1 ? "Reviews" : "Review"}</h2>
-        {reviewsList.map((review) => (
-          <div key={review.id}>
-            <h3 className="user-first-name">{review.User.firstName}</h3>
-            <h4>{generateDate(review.createdAt)}</h4>
-            <p>{review.review}</p>
-            {(review.userId === user?.id) &&
-              <OpenModalButton buttonText='Delete Review' modalComponent={<DeleteReviewModalButton reviewId={review.id} spotId={spot.id} />} />}
-
+        {reviewsList.length ?
+          <div>
+            <div>
+              <h2 className='stars'><span className="material-symbols-outlined">star_rate</span>{Number(avgStarRating).toFixed(2)} · {numReviews} {numReviews > 1 ? "Reviews" : "Review"}</h2>
+              <div className='post-review-container'>
+              {user && !previousReview && (spot.ownerId !== user?.id) &&
+                <OpenModalButton buttonText='Post Your Review' modalComponent={<CreateReviewModalButton spot={spot} user={user} />} />}
+            </div>
+              {reviewsList.map((review) => (
+                <div key={review.id}>
+                  <h3 className="user-first-name">{review.User.firstName}</h3>
+                  <h4>{generateDate(review.createdAt)}</h4>
+                  <p>{review.review}</p>
+                  {(review.userId === user?.id) &&
+                    <OpenModalButton buttonText='Delete Review' modalComponent={<DeleteReviewModalButton reviewId={review.id} spotId={spot.id} />} />}
+                </div>
+              ))}
+            </div>
           </div>
+          :
+          <div>
+            <h2 className='stars' ><span className="material-symbols-outlined">star_rate</span> New</h2>
+            <h3>Be the first to post a review!</h3>
+            <div className='post-review-container'>
+              {user && !previousReview && (spot.ownerId !== user?.id) &&
+                <OpenModalButton buttonText='Post Your Review' modalComponent={<CreateReviewModalButton spot={spot} user={user} />} />}
+            </div>
+          </div>}
 
-        ))}
       </div>
 
     </div>

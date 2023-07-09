@@ -17,24 +17,7 @@ module.exports = {
     */
     options.tableName = 'Reviews';
     return queryInterface.bulkInsert(options, [
-      {
-        spotId: 1,
-        userId: 2,
-        review: "Great experience! Incredible place in such a beautiful location. I recommend!",
-        stars: 5
-      },
-      {
-        spotId: 1,
-        userId: 3,
-        review: "BEAUTIFUL! I cannot wait to stay there again!",
-        stars: 5
-      },
-      {
-        spotId: 1,
-        userId: 4,
-        review: "Great experience! The place is really well kept and a perfect getaway",
-        stars: 5
-      },
+     
       {
         spotId: 2,
         userId: 5,

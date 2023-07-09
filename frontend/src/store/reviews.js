@@ -32,7 +32,6 @@ export const thunkGetSpotReviews = (spotId) => async (dispatch) => {
 
   if (response.ok) {
     const reviews = await response.json();
-    console.log("thunk review", reviews)
     dispatch(getSpotReviews(reviews.Reviews, spotId));
     return response
   }else {
@@ -42,7 +41,7 @@ export const thunkGetSpotReviews = (spotId) => async (dispatch) => {
 }
 
 export const thunkCreateReview = (review, spotId, user) => async (dispatch) => {
-  console.log("id from thunk", spotId)
+
   try {
     const response = await csrfFetch(`/api/spots/${spotId}/reviews`, {
       method: "POST",

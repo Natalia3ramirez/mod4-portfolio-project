@@ -66,10 +66,10 @@ function LoginFormModal() {
           />
         </label>
         {errors.credential && credential.length > 0 && (
-          <p>{errors.credential}</p>
+          <p className='on-submit-errors'>{errors.credential}</p>
         )}
         {errors.password && password.length > 0 && (
-          <p>{errors.password}</p>
+          <p className='on-submit-errors'>{errors.password}</p>
         )}
         <button disabled={Object.keys(errors).length > 0} type="submit">Log In</button>
       </form>

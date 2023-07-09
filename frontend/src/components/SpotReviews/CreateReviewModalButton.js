@@ -61,6 +61,9 @@ export const CreateReviewModalButton = ({ spot, user, spotId, avgStarRating, num
             onChange={(e) => setReview(e.target.value)}
             placeholder="Leave your review here..."
           />
+          {errors.review && review.length > 0 && (
+            <p className='on-submit-errors'>{errors.review}</p>
+          )}
           <label className="review-label">
             Stars:
             <div className="rating-input">

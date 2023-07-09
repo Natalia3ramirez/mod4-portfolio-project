@@ -11,11 +11,7 @@ import { thunkGetSpotInfo, thunkUpdateSpot } from '../../store/spots'
 export const UpdateSpot = ({ spot }) => {
   const dispatch = useDispatch();
   const history = useHistory()
-  // const {spotId} = useParams()
 
-
-  // const spot = useSelector(state => (state.spot.singleSpot))
- console.log("this is the spot", spot)
 
   const [address, setAddress] = useState(spot?.address);
   const [city, setCity] = useState(spot?.city);
@@ -56,7 +52,7 @@ export const UpdateSpot = ({ spot }) => {
 
     setErrors(errors)
   }, [address, city, state, country, name, description, price] )
-//  console.log("this is the spot", spot)
+
   if(!spot) {
     history.push('/')
   }
@@ -66,7 +62,7 @@ export const UpdateSpot = ({ spot }) => {
 
     setSubmitted(true)
 
-    console.log("these are the errors", errors)
+
     if(!Object.values(errors).length) {
       let updateSpot = { address, city, state, country, name, description, price, lat: 90, lng: 90 }
      await dispatch(thunkUpdateSpot(updateSpot, spot.id))
@@ -74,7 +70,6 @@ export const UpdateSpot = ({ spot }) => {
 
 
     } else {
-      console.log("we made it!")
       history.push('/')
     }
 
@@ -83,8 +78,8 @@ export const UpdateSpot = ({ spot }) => {
 
 
   return (
-    <form className='creat-newspot-container'>
-      <h1>Update YourSpot!</h1>
+    <form onSubmit={handleSubmit} className='creat-newspot-container'>
+      <h1>Update Your Spot!</h1>
 
       <div className='create-newspot-header'>
         <h3>Where's your place located?</h3>
@@ -161,9 +156,7 @@ export const UpdateSpot = ({ spot }) => {
         <p className='form-input-errors'>{errors.price}</p>
       </div>
 
-
-
-      <button type='submit' onClick={handleSubmit}>Update Your Spot</button>
+      <button type='submit' >Update Your Spot</button>
 
     </form>
 

@@ -93,11 +93,6 @@ module.exports = {
         preview: false
       },
       {
-        spotId: 3,
-        url: "https://tinyurl.com/3mnb4cpm",
-        preview: false
-      },
-      {
         spotId: 4,
         url: "https://tinyurl.com/2s3n7yde",
         preview: true
