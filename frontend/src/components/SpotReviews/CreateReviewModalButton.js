@@ -3,14 +3,12 @@ import { useDispatch } from 'react-redux'
 import { thunkCreateReview } from '../../store/reviews'
 import { useModal } from '../../context/Modal'
 import { thunkGetSpotInfo } from '../../store/spots'
-import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
 import { useState, useEffect } from 'react'
 
 
 
 export const CreateReviewModalButton = ({ spot, user, spotId, avgStarRating, numReviews }) => {
   const dispatch = useDispatch()
-  const history = useHistory()
   const { closeModal } = useModal()
   const [review, setReview] = useState('');
   const [stars, setStars] = useState(null);

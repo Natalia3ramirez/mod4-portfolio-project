@@ -19,7 +19,7 @@ function Navigation({ isLoaded }){
     <ul className='nav-list'>
       <li>
         <NavLink exact to="/" activeClassName='logo' onClick={handleLogoClick}>
-          <img src={relaxrnr} className='logo' />
+          <img src={relaxrnr} className='logo' alt='relaxrnr' />
         </NavLink>
       </li>
       {isLoaded && (

@@ -1,9 +1,8 @@
 import './Spots.css'
 import React, {useState, useEffect} from 'react'
-import { useDispatch, useSelector} from 'react-redux'
+import { useDispatch} from 'react-redux'
 import { useHistory } from 'react-router-dom/cjs/react-router-dom.min'
-import { useParams } from 'react-router-dom/cjs/react-router-dom.min'
-import { thunkGetSpotInfo, thunkUpdateSpot } from '../../store/spots'
+import { thunkUpdateSpot } from '../../store/spots'
 
 
 

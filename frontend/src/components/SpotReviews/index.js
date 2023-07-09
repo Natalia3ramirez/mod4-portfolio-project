@@ -19,7 +19,7 @@ export const SpotReviews = () => {
 
   useEffect(() => {
     dispatch(thunkGetSpotReviews(spotId))
-  }, [dispatch])
+  }, [dispatch, spotId])
 
   if (!reviews[spotId]) return null
   const reviewsList = Object.values(reviews[spotId]).reverse()

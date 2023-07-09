@@ -16,9 +16,7 @@ export const SingleSpotInformation = () => {
   const oneSpot = useSelector(state => (state.spot.singleSpot))
   const reviews = useSelector(state => state.review.spot)
 
-
-
-  const user = useSelector(state => state.session.user)
+  // const user = useSelector(state => state.session.user)
 
 
   useEffect(() => {

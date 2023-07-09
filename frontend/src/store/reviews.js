@@ -13,12 +13,7 @@ const getSpotReviews = (reviews, spotId) => {
 }
 
 
-const deleteReview = (reviewId, spotId) => {
-  return {
-    type: DELETE_REVIEW,
-    reviewId, spotId
-  }
-}
+
 export const cleanupReviews = () => {
   return {
     type: CLEAN_UP_REVIEWS

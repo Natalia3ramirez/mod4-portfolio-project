@@ -61,14 +61,6 @@ module.exports = {
       {
         reviewId: 34,
         url: "https://tinyurl.com/4h5rzp2f"
-      },
-      {
-        reviewId: 37,
-        url: "https://tinyurl.com/23t7abdf"
-      },
-      {
-        reviewId: 40,
-        url: "https://tinyurl.com/mvdeydfj"
       }
     ], {})
   },
