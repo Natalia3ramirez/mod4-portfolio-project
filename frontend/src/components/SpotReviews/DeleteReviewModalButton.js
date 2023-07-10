@@ -7,7 +7,7 @@ import { thunkGetSpotInfo } from '../../store/spots';
 
 
 
-export const DeleteReviewModalButton = ({reviewId, spotId}) => {
+export const DeleteReviewModalButton = ({ reviewId, spotId }) => {
   const dispatch = useDispatch()
 
   const { closeModal } = useModal()
@@ -15,8 +15,8 @@ export const DeleteReviewModalButton = ({reviewId, spotId}) => {
   const onClick = (e) => {
     e.preventDefault();
     dispatch(thunkDeleteReview(reviewId, spotId))
-    .then(() => dispatch(thunkGetSpotInfo(spotId)))
-    .then(closeModal)
+      .then(() => dispatch(thunkGetSpotInfo(spotId)))
+      .then(closeModal)
 
   }
 
@@ -25,9 +25,11 @@ export const DeleteReviewModalButton = ({reviewId, spotId}) => {
     <>
       <div className='delete-review-container'>
         <h2>Confirm Delete</h2>
-        <h3>Are you sure you want to delete this review?</h3>
-        <button type='button' onClick={onClick} className='yes-button'>Yes (Delete Review)</button>
-        <button type='button' onClick={closeModal} className='no-button'>No (Keep Review)</button>
+        <p>Are you sure you want to delete this review?</p>
+        <div className='delete-review-yes-no'>
+          <button type='button' onClick={onClick} className='yes-button'>Yes (Delete Review)</button>
+          <button type='button' onClick={closeModal} className='no-button'>No (Keep Review)</button>
+        </div>
       </div>
     </>
   )

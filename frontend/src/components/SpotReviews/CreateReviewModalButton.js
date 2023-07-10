@@ -26,17 +26,17 @@ export const CreateReviewModalButton = ({ spot, user, spotId, avgStarRating, num
     setErrors(errors)
   }, [review, stars])
 
-  if(!user) return null
+  if (!user) return null
 
   const onClick = (e) => {
     e.preventDefault();
 
-      const newReview = {stars, review}
-      const spotId = spot.id
-       dispatch(thunkCreateReview(newReview, spotId, user))
+    const newReview = { stars, review }
+    const spotId = spot.id
+    dispatch(thunkCreateReview(newReview, spotId, user))
 
-       .then(() => dispatch(thunkGetSpotInfo(spot.id)))
-       .then(() => closeModal())
+      .then(() => dispatch(thunkGetSpotInfo(spot.id)))
+      .then(() => closeModal())
 
       .catch(error => {
         setServerError(error)
@@ -61,55 +61,55 @@ export const CreateReviewModalButton = ({ spot, user, spotId, avgStarRating, num
             onChange={(e) => setReview(e.target.value)}
             placeholder="Leave your review here..."
           />
-          {errors.review && review.length > 0 && (
-            <p className='on-submit-errors'>{errors.review}</p>
-          )}
-          <label className="review-label">
-            Stars:
-            <div className="rating-input">
-              <div
-                className={activeRating >= 1 ? "filled" : "empty"}
-                onMouseEnter={() => setActiveRating(1)}
-                onMouseLeave={() => setActiveRating(stars)}
-                onClick={() => setStars(1)}
-              >
-                <span className="material-symbols-outlined">star_rate</span>
+         
+          <div id="stars-container">
+            <label className="review-label">
+              Stars:
+            </label>
+              <div className="rating-input">
+                <div
+                  className={activeRating >= 1 ? "filled" : "empty"}
+                  onMouseEnter={() => setActiveRating(1)}
+                  onMouseLeave={() => setActiveRating(stars)}
+                  onClick={() => setStars(1)}
+                >
+                  <i className="fa-solid fa-star medium-big-star clickable" ></i>
+                </div>
+                <div
+                  className={activeRating >= 2 ? "filled" : "empty"}
+                  onMouseEnter={() => setActiveRating(2)}
+                  onMouseLeave={() => setActiveRating(stars)}
+                  onClick={() => setStars(2)}
+                >
+                  <i className="fa-solid fa-star medium-big-star clickable" ></i>
+                </div>
+                <div
+                  className={activeRating >= 3 ? "filled" : "empty"}
+                  onMouseEnter={() => setActiveRating(3)}
+                  onMouseLeave={() => setActiveRating(stars)}
+                  onClick={() => setStars(3)}
+                >
+                  <i className="fa-solid fa-star medium-big-star clickable" ></i>
+                </div>
+                <div
+                  className={activeRating >= 4 ? "filled" : "empty"}
+                  onMouseEnter={() => setActiveRating(4)}
+                  onMouseLeave={() => setActiveRating(stars)}
+                  onClick={() => setStars(4)}
+                >
+                  <i className="fa-solid fa-star medium-big-star clickable" ></i>
+                </div>
+                <div
+                  className={activeRating >= 5 ? "filled" : "empty"}
+                  onMouseEnter={() => setActiveRating(5)}
+                  onMouseLeave={() => setActiveRating(stars)}
+                  onClick={() => setStars(5)}
+                >
+                  <i className="fa-solid fa-star medium-big-star clickable" ></i>
+                </div>
               </div>
-              <div
-                className={activeRating >= 2 ? "filled" : "empty"}
-                onMouseEnter={() => setActiveRating(2)}
-                onMouseLeave={() => setActiveRating(stars)}
-                onClick={() => setStars(2)}
-              >
-                <span className="material-symbols-outlined">star_rate</span>
-              </div>
-              <div
-                className={activeRating >= 3 ? "filled" : "empty"}
-                onMouseEnter={() => setActiveRating(3)}
-                onMouseLeave={() => setActiveRating(stars)}
-                onClick={() => setStars(3)}
-              >
-                <span className="material-symbols-outlined">star_rate</span>
-              </div>
-              <div
-                className={activeRating >= 4 ? "filled" : "empty"}
-                onMouseEnter={() => setActiveRating(4)}
-                onMouseLeave={() => setActiveRating(stars)}
-                onClick={() => setStars(4)}
-              >
-                <span className="material-symbols-outlined">star_rate</span>
-              </div>
-              <div
-                className={activeRating >= 5 ? "filled" : "empty"}
-                onMouseEnter={() => setActiveRating(5)}
-                onMouseLeave={() => setActiveRating(stars)}
-                onClick={() => setStars(5)}
-              >
-                <span className="material-symbols-outlined">star_rate</span>
-              </div>
-            </div>
 
-          </label>
+          </div>
           <button className="review-button" disabled={disabled} onClick={onClick} type="submit">Submit Your Review</button>
         </div>
       </form>
