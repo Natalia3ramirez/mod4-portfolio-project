@@ -34,10 +34,9 @@
   grid-auto-rows: minmax(100px, auto);
   margin-top: 25px;
   margin-left: 45px;
-  margin-right: 45px
+  margin-right: 45px;
+  margin-bottom: 25px
 }
-
-
 
 
 .star-rating {
@@ -80,7 +79,6 @@
   justify-content: center;
   align-items: center;
   margin-bottom: 17px;
-  
   height: 30px;
   border-radius: 5px;
   border: 1px solid rgb(250, 78, 30);
@@ -88,3 +86,5 @@
   color: white;
   margin-top: 10px;
 }
+
+

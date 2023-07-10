@@ -6,3 +6,9 @@ button:hover {
 .body-container {
   font-family: system-ui, sans-serif;
 }
+
+
+#root {
+  margin-bottom: 45px;
+}
+
