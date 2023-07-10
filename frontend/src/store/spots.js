@@ -98,7 +98,7 @@ export const thunkCreateSpot = (spot, spotImages, user ) => async (dispatch) => 
 
   if(response.ok) {
     const data = await response.json()
-    dispatch(thunkSpotImage(data, spotImages, user))
+    await dispatch(thunkSpotImage(data, spotImages, user))
     return data
   } else {
     const errors = await response.json();

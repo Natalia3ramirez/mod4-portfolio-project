@@ -64,7 +64,9 @@ export const CreateSpot = ({ user }) => {
     if (!Object.values(errors).length) {
       imgUrl.forEach((img, i) => {
         const preview = { url: img, preview: i === 0 }
-        if (img) imgUrlList.push(preview)
+        if (img) {
+          imgUrlList.push(preview)
+        }
       });
 
 
@@ -75,8 +77,6 @@ export const CreateSpot = ({ user }) => {
       else history.push(`/spots/${addSpot.id}`)
     }
   }
-
-
 
 
 
