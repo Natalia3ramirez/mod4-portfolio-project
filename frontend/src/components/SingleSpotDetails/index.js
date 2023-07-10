@@ -13,8 +13,6 @@ export const SingleSpotDetails = ({ spot }) => {
   }
 
   const displayImage = previewImage ? previewImage : null
-  // const imagePreview = SpotImages.find(image => image.preview) || SpotImages[0]
-  // const additionalImages = SpotImages.filter(image => !image.preview)
 
 
   return (

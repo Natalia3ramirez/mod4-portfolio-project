@@ -36,7 +36,7 @@ export const SpotReviews = () => {
 
 
   return (
-    <div className='single-spot-detaile'>
+    <div className='single-spot-details'>
       <SingleSpotInformation />
       <div>
         {reviewsList.length ?
@@ -44,15 +44,15 @@ export const SpotReviews = () => {
             <div>
               <h2 className='stars'><span className="material-symbols-outlined">star_rate</span>{Number(avgStarRating).toFixed(2)} · {numReviews} {numReviews > 1 ? "Reviews" : "Review"}</h2>
               <div className='post-review-container'>
-              {user && !previousReview && (spot.ownerId !== user?.id) &&
-                <OpenModalButton buttonText='Post Your Review' modalComponent={<CreateReviewModalButton spot={spot} user={user} />} />}
-            </div>
+                {user && !previousReview && (spot.ownerId !== user?.id) &&
+                  <OpenModalButton buttonText='Post Your Review' modalComponent={<CreateReviewModalButton spot={spot} user={user} />} />}
+              </div>
               {reviewsList.map((review) => (
-                <div key={review.id}>
+                <div className='delete-button-container' key={review.id}>
                   <h3 className="user-first-name">{review.User.firstName}</h3>
                   <h4>{generateDate(review.createdAt)}</h4>
                   <p>{review.review}</p>
-                  {(review.userId === user?.id) &&
+                  {(review.userId === user?.id) && 
                     <OpenModalButton buttonText='Delete Review' modalComponent={<DeleteReviewModalButton reviewId={review.id} spotId={spot.id} />} />}
                 </div>
               ))}
@@ -61,10 +61,11 @@ export const SpotReviews = () => {
           :
           <div>
             <h2 className='stars' ><span className="material-symbols-outlined">star_rate</span> New</h2>
-            <h3>Be the first to post a review!</h3>
             <div className='post-review-container'>
               {user && !previousReview && (spot.ownerId !== user?.id) &&
                 <OpenModalButton buttonText='Post Your Review' modalComponent={<CreateReviewModalButton spot={spot} user={user} />} />}
+              {user && !previousReview && (spot.ownerId !== user?.id) &&
+                <h3>Be the first to post a review!</h3>}
             </div>
           </div>}
 

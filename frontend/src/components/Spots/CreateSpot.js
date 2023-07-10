@@ -81,50 +81,53 @@ export const CreateSpot = ({ user }) => {
 
 
   return (
-    <>
+    <div className='create-a-spot-form'>
       <h1>Create a New Spot</h1>
-      <form onSubmit={handleSubmit} >
+      <form onSubmit={handleSubmit}  >
 
         <div className='create-newspot-header'>
           <h3>Where's your place located?</h3>
           <p>Guests will only get your exact address once they booked a reservation.</p>
-
-          <label>Country
+          <div className='country-address-container'>
+            <label>Country</label>
             <input
               type="text"
               value={country}
               onChange={(e) => setCountry(e.target.value)}
               placeholder='Country'
             />
-          </label>
-          {errors.country && submitted  && (<p className='on-submit-errors'>{errors.country}</p>)}
-          <label>Street Address
+            {errors.country && submitted && (<p className='on-submit-errors'>{errors.country}</p>)}
+            <label>Street Address</label>
             <input
               type="text"
               value={address}
               onChange={(e) => setAddress(e.target.value)}
               placeholder='Address'
             />
-          </label>
-          {errors.address && submitted  && (<p className='on-submit-errors'>{errors.address}</p>)}
-          <label>City
-          <input
-            type="text"
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
-            placeholder='City'
-          />
-          </label>
-          {errors.city && submitted  && (<p className='on-submit-errors'>{errors.city}</p>)}
-          <label>State
-          <input
-            type="text"
-            value={state}
-            onChange={(e) => setState(e.target.value)}
-            placeholder='State'
-          />
-          </label>
-          {errors.state && submitted  && (<p className='on-submit-errors'>{errors.state}</p>)}
+            {errors.address && submitted && (<p className='on-submit-errors'>{errors.address}</p>)}
+          </div>
+          <div className='city-and-state-container'>
+            <div className='city-and-state'>
+              <label className='city-label'>City</label>
+              <input
+                type="text"
+                value={city}
+                onChange={(e) => setCity(e.target.value)}
+                placeholder='City'
+              />
+              {errors.city && submitted && (<p className='on-submit-errors'>{errors.city}</p>)}
+            </div>
+            <div className='state-label'>
+              <label className='state-label'>State</label>
+              <input
+                type="text"
+                value={state}
+                onChange={(e) => setState(e.target.value)}
+                placeholder='State'
+              />
+              {errors.state && submitted && (<p className='on-submit-errors'>{errors.state}</p>)}
+            </div>
+          </div>
         </div>
         <div className='create-spot-description'>
           <h3>Describe your place to guests</h3>
@@ -134,7 +137,7 @@ export const CreateSpot = ({ user }) => {
             onChange={(e) => setDescription(e.target.value)}
             placeholder="Please write at least 30 characters"
           />
-          {errors.description && submitted  && (<p className='on-submit-errors'>{errors.description}</p>)}
+          {errors.description && submitted && (<p className='on-submit-errors'>{errors.description}</p>)}
         </div>
         <div className='create-spot-title'>
           <h3>Create a title for your spot</h3>
@@ -145,7 +148,7 @@ export const CreateSpot = ({ user }) => {
             onChange={(e) => setName(e.target.value)}
             placeholder='Name your spot'
           />
-          {errors.name && submitted  && (<p className='on-submit-errors'>{errors.name}</p>)}
+          {errors.name && submitted && (<p className='on-submit-errors'>{errors.name}</p>)}
         </div>
 
         <div className='create-spot-price'>
@@ -157,9 +160,9 @@ export const CreateSpot = ({ user }) => {
             onChange={(e) => setPrice(e.target.value)}
             placeholder='Price per night (USD)'
           />
-          {errors.price && submitted  && (<p className='on-submit-errors'>{errors.price}</p>)}
+          {errors.price && submitted && (<p className='on-submit-errors'>{errors.price}</p>)}
         </div>
-        <div className='create-spot-header'>
+        <div className='create-spot-images'>
           <h3>Liven up your spot with photos</h3>
           <p>Submit a link to at least one photo to publish your spot.</p>
           <input
@@ -168,40 +171,41 @@ export const CreateSpot = ({ user }) => {
             onChange={(e) => setImgOne(e.target.value)}
             placeholder='Preview Image URL'
           />
-          {errors.imgOne && submitted  && (<p className='on-submit-errors'>{errors.imgOne}</p>)}
+          {errors.imgOne && submitted && (<p className='on-submit-errors'>{errors.imgOne}</p>)}
           <input
             type="url"
             value={imgTwo}
             onChange={(e) => setImgTwo(e.target.value)}
             placeholder='Image URL'
           />
-          {errors.imgTwo && submitted  && (<p className='on-submit-errors'>{errors.imgTwo}</p>)}
+          {errors.imgTwo && submitted && (<p className='on-submit-errors'>{errors.imgTwo}</p>)}
           <input
             type="url"
             value={imgThree}
             onChange={(e) => setImgThree(e.target.value)}
             placeholder='Image URL'
           />
-          {errors.imgThree && submitted  && (<p className='on-submit-errors'>{errors.imgThree}</p>)}
+          {errors.imgThree && submitted && (<p className='on-submit-errors'>{errors.imgThree}</p>)}
           <input
             type="url"
             value={imgFour}
             onChange={(e) => setImgFour(e.target.value)}
             placeholder='Image URL'
           />
-          {errors.imgFour && submitted  && (<p className='on-submit-errors'>{errors.imgFour}</p>)}
+          {errors.imgFour && submitted && (<p className='on-submit-errors'>{errors.imgFour}</p>)}
           <input
             type="url"
             value={imgFive}
             onChange={(e) => setImageFive(e.target.value)}
             placeholder='Image URL'
           />
-          {errors.imgFive && submitted  && (<p className='on-submit-errors'>{errors.imgFive}</p>)}
+          {errors.imgFive && submitted && (<p className='on-submit-errors'>{errors.imgFive}</p>)}
         </div>
-
-        <button type="submit" >Create Spot</button>
+        <div className='create-spot-button'>
+          <button className="create-spot-submit" type="submit" >Create Spot</button>
+        </div>
       </form>
-    </>
+    </div>
 
   )
 

@@ -29,21 +29,65 @@
 }
 
 
-
-
-
 .spot-name-description {
+<<<<<<< HEAD
   border-bottom: 2px solid black;
 } 
 
+=======
+  width: 67%;
+  margin-left: 3px;
+}
+>>>>>>> dev
 
 .reserve-box {
-  border: 1px solid black;
-  display: flex;
-  justify-content: flex-end
-
+  margin-bottom: 25px;
+  margin-top: 20px;
+  padding: 10px;
+  border-radius: 21px;
+  width: 33%;
+  box-shadow: 0.5rem 0.5rem 2rem #d3d3d3;
 }
 
 .single-spot-details {
-  margin: 25px
+  margin-left: 45px;
+  margin-right: 45px
+}
+
+.reviews-price-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 15px;
+  padding-right: 15px
+}
+
+.description-reserve-container {
+  border-bottom: 1px solid #CCCCCC;
+  display: flex;
+
+}
+
+
+.reserve-modal {
+  display: flex;
+  justify-content: center;
+
+}
+
+.reserve-modal > button {
+  margin-bottom: 17px;
+  width: 90%;
+  height: 30px;
+  border-radius: 5px;
+  border: 1px solid rgb(250, 78, 30);
+  background-color: rgb(250, 78, 30);
+  color: white
+}
+
+
+.star-and-reviews {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
