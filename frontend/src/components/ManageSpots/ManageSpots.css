@@ -32,15 +32,6 @@
 }
 
 
-#modal-content {
-  width: 300px;
-  height: 175px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-
 .yes-no-delete-spot {
   display: flex;
   flex-direction: column;
