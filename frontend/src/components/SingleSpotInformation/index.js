@@ -2,8 +2,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { thunkGetSpotInfo } from '../../store/spots';
-import OpenModalButton from "../OpenModalButton";
-import ReserveModal from '../ReserveModal';
+// import OpenModalButton from "../OpenModalButton";
+// import ReserveModal from '../ReserveModal';
 import { thunkGetSpotReviews } from '../../store/reviews';
 import './SingleSpotInformation.css'
 
@@ -74,7 +74,7 @@ export const SingleSpotInformation = () => {
                 }
               </div>
               <div className='reserve-modal'>
-                <OpenModalButton buttonText='Reserve' modalComponent={<ReserveModal />} />
+                <button onClick={() => alert("feature coming soon...")}>Reserve</button>
               </div>
             </div>
           </div>
