@@ -59,11 +59,8 @@ export const CreateReviewModalButton = ({ spot, user, spotId, avgStarRating, num
             onChange={(e) => setReview(e.target.value)}
             placeholder="Leave your review here..."
           />
-         
+
           <div id="stars-container">
-            <label className="review-label">
-              Stars:
-            </label>
               <div className="rating-input">
                 <div
                   className={activeRating >= 1 ? "filled" : "empty"}
@@ -106,6 +103,9 @@ export const CreateReviewModalButton = ({ spot, user, spotId, avgStarRating, num
                   <i className="fa-solid fa-star medium-big-star clickable" ></i>
                 </div>
               </div>
+              <label className="review-label">
+              Stars
+            </label>
 
           </div>
           <button className="review-button" disabled={disabled} onClick={onClick} type="submit">Submit Your Review</button>

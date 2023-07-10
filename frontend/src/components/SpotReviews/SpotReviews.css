@@ -48,6 +48,7 @@
 #stars-container {
   display: flex;
   justify-content: center;
+  margin: 15px
 }
 
 .review-button {
@@ -62,4 +63,8 @@
 
 .post-review-container > h2 {
   margin-bottom: 5px
+}
+
+.post-review-container {
+  margin: 20px
 }
